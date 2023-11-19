@@ -9,7 +9,7 @@ const Navbar = ({
 }) => {
   return (
     <div className="w-full h-[60px] fixed shadow-sm p-6 bg-white z-10 flex justify-between items-center text-lg">
-      Dyte Assignment
+      Dyte Assignment - SDE Intern
       <div className="flex gap-5">
         {isFilter ? (
           <Button
