@@ -1,0 +1,142 @@
+openapi: 3.0.0
+info:
+  description: LOG Restful api.
+  version: 1.0.0
+  title: LOG Backend
+paths:
+  /log:
+    get:
+      tags:
+        - logs
+      summary: get log
+      description: get list of logs
+      parameters:
+        - name: level
+          in: query
+          description: level to be searched.
+          schema:
+            type: string
+        - name: message
+          in: query
+          description: message to be searched.
+          schema:
+            type: string
+        - name: resourceId
+          in: query
+          description: resourceId to be searched.
+          schema:
+            type: string
+        - name: timestamp
+          in: query
+          description: timestamp to be searched.
+          schema:
+            type: string
+        - name: traceId
+          in: query
+          description: traceId to be searched.
+          schema:
+            type: string
+        - name: spanId
+          in: query
+          description: spanId to be searched.
+          schema:
+            type: string
+        - name: commit
+          in: query
+          description: commit to be searched.
+          schema:
+            type: string
+        - name: parentResourceId
+          in: query
+          description: parentResourceId to be searched.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: log get successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+    post:
+      tags:
+        - logs
+      summary: insert log
+      description: insert log
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - level
+                - message
+                - resourceId
+                - timestamp
+                - traceId
+                - spanId
+                - commit
+                - metadata
+              properties:
+                level:
+                  type: string
+                message:
+                  type: string
+                resourceId:
+                  type: string
+                timestamp:
+                  type: string
+                traceId:
+                  type: string
+                spanId:
+                  type: string
+                commit:
+                  type: string
+                metadata:
+                  type: object
+                  properties:
+                    parentResourceId:
+                      type: string
+      responses:
+        '201':
+          description: User login successfuly
+          content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/response'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/response'
+components:
+  schemas:
+    response:
+      properties:
+        status:
+          type: string
+        code:
+          type: number
+        message:
+          type: string
+        data:
+          type: object
